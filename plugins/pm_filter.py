@@ -1662,7 +1662,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('⚡️ Kr Imax Movies ⚡️', url=f'http://t.me/Kr_Imax')
         ],[
                 InlineKeyboardButton(
-                    "💸 Donate Us 💸", callback_data='seeplans'
+                    "👑 𝗢𝘄𝗻𝗲𝗿 👑", url=f'https://t.me/Kingkr18'
                 )
             ]]
         reply_markup = InlineKeyboardMarkup(buttons)

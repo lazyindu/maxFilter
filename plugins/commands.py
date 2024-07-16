@@ -55,7 +55,7 @@ async def start(client, message):
             InlineKeyboardButton('⚡️ Kr Imax Movies ⚡️', url=f'http://t.me/Kr_Imax')
             ],[
                     InlineKeyboardButton(
-                        "💸 Donate Us 💸", callback_data='seeplans'
+                         "👑 𝗢𝘄𝗻𝗲𝗿 👑", url=f'https://t.me/Kingkr18'
                     )
                 ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -103,9 +103,7 @@ async def start(client, message):
         buttons = [[
             InlineKeyboardButton('⚡️ Kr Imax Movies ⚡️', url=f'http://t.me/Kr_Imax')
         ],[
-                InlineKeyboardButton(
-                    "💸 Donate Us 💸", callback_data='seeplans'
-                )
+                InlineKeyboardButton( "👑 𝗢𝘄𝗻𝗲𝗿 👑", url=f'https://t.me/Kingkr18')
             ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
@@ -237,7 +235,7 @@ async def start(client, message):
                             InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost_url)
                         ],
                         [
-                            InlineKeyboardButton('🎉 Donate US 🎊', callback_data="seeplans")
+                            InlineKeyboardButton("👑 𝗢𝘄𝗻𝗲𝗿 👑", url=f'https://t.me/Kingkr18')
                         ]
                     ]
                 )
@@ -262,7 +260,7 @@ async def start(client, message):
                 [[
                     InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost)
                 ],[
-                    InlineKeyboardButton('✨ Donate US ✨', callback_data="seeplans")
+                    InlineKeyboardButton("👑 𝗢𝘄𝗻𝗲𝗿 👑", url=f'https://t.me/Kingkr18')
                 ]]
             )
         )
@@ -329,7 +327,7 @@ async def start(client, message):
                         [
                             InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=generatedurl)
                         ],[
-                            InlineKeyboardButton('✨ Donate US ✨', callback_data="seeplans")                            
+                            InlineKeyboardButton("👑 𝗢𝘄𝗻𝗲𝗿 👑", url=f'https://t.me/Kingkr18')                            
                         ]
                     ]
                 )
