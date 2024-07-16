@@ -1602,7 +1602,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     chat_id=query.from_user.id,
                     file_id=file_id,
                     caption=f_caption,
-                    reply_markup=keyboard,
                     protect_content=True if ident == "filep" else False 
                 )
                 btnl = [[
@@ -1652,7 +1651,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             chat_id=query.from_user.id,
             file_id=file_id,
             caption=f_caption,
-            reply_markup=keyboard,
             protect_content=True if ident == 'checksubp' else False
         )
     elif query.data == "pages":
