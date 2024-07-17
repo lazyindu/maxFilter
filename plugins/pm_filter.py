@@ -62,30 +62,34 @@ BUTTONS0 = {}
 BUTTONS1 = {}
 BUTTONS2 = {}
 
-# @Client.on_message(filters.group & filters.text & filters.incoming)
-# async def give_filter(client, message):
-#     try:
-#         chatIDx = message.chat.id
-#         lazy_chatIDx = await db.get_chat(int(chatIDx))
-#         if lazy_chatIDx['is_lazy_verified']:
-#             k = await manual_filters(client, message)
-#     except Exception as e:
-#         logger.error(f"Chat not verifeid : {e}") 
-
-#     if k == False:
-#         try:
-#             chatID = message.chat.id
-#             lazy_chatID = await db.get_chat(int(chatID))
-#             if lazy_chatID['is_lazy_verified']:
-#                 await auto_filter(client, message)
-#         except Exception as e:
-#             logger.error(f"Chat Not verified : {e}") 
-
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
-    k = await manual_filters(client, message)
+    try:
+        chatIDx = message.chat.id
+        lazy_chatIDx = await db.get_chat(int(chatIDx))
+        if lazy_chatIDx['is_lazy_verified']:
+            k = await manual_filters(client, message)
+        else:
+            message.reply_text(f"This is not verified group ! Please join our official group to get files => {MOVIE_GROUP_USERNAME}")
+    except Exception as e:
+        logger.error(f"Chat not verifeid : {e}")
+
     if k == False:
-        await auto_filter(client, message)
+        try:
+            chatID = message.chat.id
+            lazy_chatID = await db.get_chat(int(chatID))
+            if lazy_chatID['is_lazy_verified']:
+                await auto_filter(client, message)
+            else:
+                message.reply_text(f"This is not verified group ! Please join our official group to get files => {MOVIE_GROUP_USERNAME}")
+        except Exception as e:
+            logger.error(f"Chat Not verified : {e}") 
+
+# @Client.on_message(filters.group & filters.text & filters.incoming)
+# async def give_filter(client, message):
+#     k = await manual_filters(client, message)
+#     if k == False:
+#         await auto_filter(client, message)
 
 @Client.on_callback_query(filters.regex('rename'))
 async def rename(bot,update):
@@ -2415,30 +2419,30 @@ async def auto_filter(client, msg, spoll=False):
             files, offset, total_results = await get_search_results_badAss_LazyDeveloperr(message.chat.id ,search, offset=0, filter=True)
             if not files:
                 # Generate the search URL
-                generated_link = f"https://google.com/search?q={quote(search)}"
-                await client.send_message(req_channel,f"-🦋 #REQUESTED_CONTENT 🦋-\n\n📝**Content Name** :`{search}`\n**Requested By**: {message.from_user.first_name}\n **USER ID**:{user_id}\n\n🗃️",
-                                                                                                       reply_markup=InlineKeyboardMarkup([
-                                                                                                                                        [InlineKeyboardButton(text=f"🤞Request Recieved", callback_data=f"notify_user_req_rcvd:{user_id}:{requested_movie}")],
-                                                                                                                                        [InlineKeyboardButton(text=f"✅Upload Done", callback_data=f"notify_userupl:{user_id}:{requested_movie}")],
-                                                                                                                                        [InlineKeyboardButton(text=f"⚡Already Upl..", callback_data=f"notify_user_alrupl:{user_id}:{requested_movie}"),InlineKeyboardButton("🖊Spell Error", callback_data=f"notify_user_spelling_error:{user_id}:{requested_movie}")],
-                                                                                                                                        [InlineKeyboardButton(text=f"😒Not Available", callback_data=f"notify_user_not_avail:{user_id}:{requested_movie}")],
-                                                                                                                                        [InlineKeyboardButton("❌Reject Req", callback_data=f"notify_user_req_rejected:{user_id}:{requested_movie}")]
-                                                                                                                                        ]))
+                # generated_link = f"https://google.com/search?q={quote(search)}"
+                # await client.send_message(req_channel,f"-🦋 #REQUESTED_CONTENT 🦋-\n\n📝**Content Name** :`{search}`\n**Requested By**: {message.from_user.first_name}\n **USER ID**:{user_id}\n\n🗃️",
+                #                                                                                        reply_markup=InlineKeyboardMarkup([
+                #                                                                                                                         [InlineKeyboardButton(text=f"🤞Request Recieved", callback_data=f"notify_user_req_rcvd:{user_id}:{requested_movie}")],
+                #                                                                                                                         [InlineKeyboardButton(text=f"✅Upload Done", callback_data=f"notify_userupl:{user_id}:{requested_movie}")],
+                #                                                                                                                         [InlineKeyboardButton(text=f"⚡Already Upl..", callback_data=f"notify_user_alrupl:{user_id}:{requested_movie}"),InlineKeyboardButton("🖊Spell Error", callback_data=f"notify_user_spelling_error:{user_id}:{requested_movie}")],
+                #                                                                                                                         [InlineKeyboardButton(text=f"😒Not Available", callback_data=f"notify_user_not_avail:{user_id}:{requested_movie}")],
+                #                                                                                                                         [InlineKeyboardButton("❌Reject Req", callback_data=f"notify_user_req_rejected:{user_id}:{requested_movie}")]
+                #                                                                                                                         ]))
                 
-                l = await message.reply_text(text=f"△ HeY `{message.from_user.first_name}`🥰,\nI ᴄᴏᴜʟᴅɴ'ᴛ ғɪɴᴅ ᴀɴʏᴛʜɪɴɢ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ ʏᴏᴜʀ ʀᴇᴏ̨ᴜᴇsᴛ.🤧\n>Tʀʏ ʀᴇᴀᴅɪɴɢ ᴛʜᴇ ɪɴsᴛʀᴜᴄᴛɪᴏɴs ʙᴇʟᴏᴡ 👇",
-                                                                                                       reply_markup=InlineKeyboardMarkup([
-                                                                                                                                        [ InlineKeyboardButton("HIN", callback_data="read_in_hin"),
-                                                                                                                                          InlineKeyboardButton("ENG", callback_data="read_in_eng"),
-                                                                                                                                          InlineKeyboardButton("MAL", callback_data="read_in_mal"),
-                                                                                                                                          InlineKeyboardButton("TAM", callback_data="read_in_tam")
-                                                                                                                                        ],[
-                                                                                                                                          InlineKeyboardButton("Sanskrit", callback_data="read_in_san"),
-                                                                                                                                          InlineKeyboardButton("Urdu", callback_data="read_in_urd")
-                                                                                                                                        ],
-                                                                                                                                        [ InlineKeyboardButton("═• Search name on google​ •═", url=generated_link)],
-                                                                                                                                        ]))
-                await asyncio.sleep(60)
-                await l.delete()    
+                # l = await message.reply_text(text=f"△ HeY `{message.from_user.first_name}`🥰,\nI ᴄᴏᴜʟᴅɴ'ᴛ ғɪɴᴅ ᴀɴʏᴛʜɪɴɢ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ ʏᴏᴜʀ ʀᴇᴏ̨ᴜᴇsᴛ.🤧\n>Tʀʏ ʀᴇᴀᴅɪɴɢ ᴛʜᴇ ɪɴsᴛʀᴜᴄᴛɪᴏɴs ʙᴇʟᴏᴡ 👇",
+                #                                                                                        reply_markup=InlineKeyboardMarkup([
+                #                                                                                                                         [ InlineKeyboardButton("HIN", callback_data="read_in_hin"),
+                #                                                                                                                           InlineKeyboardButton("ENG", callback_data="read_in_eng"),
+                #                                                                                                                           InlineKeyboardButton("MAL", callback_data="read_in_mal"),
+                #                                                                                                                           InlineKeyboardButton("TAM", callback_data="read_in_tam")
+                #                                                                                                                         ],[
+                #                                                                                                                           InlineKeyboardButton("Sanskrit", callback_data="read_in_san"),
+                #                                                                                                                           InlineKeyboardButton("Urdu", callback_data="read_in_urd")
+                #                                                                                                                         ],
+                #                                                                                                                         [ InlineKeyboardButton("═• Search name on google​ •═", url=generated_link)],
+                #                                                                                                                         ]))
+                # await asyncio.sleep(60)
+                # await l.delete()    
                 if settings["spell_check"]:
                     return await advantage_spell_chok(msg)
                 else:
