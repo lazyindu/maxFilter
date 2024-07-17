@@ -70,7 +70,7 @@ async def give_filter(client, message):
         if lazy_chatIDx['is_lazy_verified']:
             k = await manual_filters(client, message)
         else:
-            message.reply_text(f"This is not verified group ! Please join our official group to get files => {MOVIE_GROUP_USERNAME}")
+            await message.reply_text(f"This is not verified group ! Please join our official group to get files => {MOVIE_GROUP_USERNAME}")
     except Exception as e:
         logger.error(f"Chat not verifeid : {e}")
 
@@ -81,7 +81,7 @@ async def give_filter(client, message):
             if lazy_chatID['is_lazy_verified']:
                 await auto_filter(client, message)
             else:
-                message.reply_text(f"This is not verified group ! Please join our official group to get files => {MOVIE_GROUP_USERNAME}")
+                await message.reply_text(f"This is not verified group ! Please join our official group to get files => {MOVIE_GROUP_USERNAME}")
         except Exception as e:
             logger.error(f"Chat Not verified : {e}") 
 
